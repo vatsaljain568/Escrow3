@@ -12,9 +12,13 @@ function Cards({ account, SendTo, Arbiter, Amount, escrowCreated, handleApprove,
                         <p className='text-[#e94f37] text-bold'>Beneficiary Address = {SendTo}</p>
                         <p className='text-[#e94f37] text-bold'>Arbiter Address = {Arbiter}</p>
                         <p className='text-[#e94f37] text-bold'>Condition = {Condition}</p>
-                        <p className='text-[#e94f37] text-bold'>Amount = {typeof Amount === 'object'
-                            ? ethers.utils.formatEther(Amount)
-                            : Amount}{" "} SepoliaETH</p>
+                        <p className='text-[#e94f37] text-bold'>
+                            Amount = {ethers.BigNumber.isBigNumber(Amount)
+                                ? ethers.utils.formatEther(Amount)
+                                : Amount?.toString?.()}{" "}
+                            SepoliaETH
+                        </p>
+
                         <div className='m-auto flex gap-4 justify-around items-center'>
                             <button onClick={handleApprove} className='bg-[#393e41] text-[#e94f37] m-auto p-3 rounded cursor-pointer'>Approve</button>
                             <button onClick={handleRefund} className='bg-[#393e41] text-[#e94f37] m-auto p-3 rounded cursor-pointer'>Refund</button>
