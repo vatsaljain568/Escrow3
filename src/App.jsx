@@ -406,12 +406,12 @@ function App() {
         setStatus("Beneficiary and Arbiter addresses cannot be the same.");
         return;
       }
-      if (SendTo === userAddress) {
+      if (SendTo.toLowerCase() === userAddress.toLowerCase()) {
         setError("You cannot be the beneficiary.");
         setStatus("You cannot be the beneficiary.");
         return;
       }
-      if (Arbiter === userAddress) {
+      if (Arbiter.toLowerCase() === userAddress.toLowerCase()) {
         setError("You cannot be the arbiter.");
         setStatus("You cannot be the arbiter.");
         return;
@@ -455,7 +455,7 @@ function App() {
   };
 
   return (
-    <div className='bg-[#f6f7eb] h-full'>
+    <div className='bg-[#f6f7eb]'>
       <Header
         isConnected={isConnected}
         account={account}

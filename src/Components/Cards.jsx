@@ -1,7 +1,15 @@
 import React from 'react'
 import { ethers } from 'ethers';
 
+function formatValue(value) {
+    if (!value) return 'Not available';
+    if (ethers.BigNumber.isBigNumber(value)) return ethers.utils.formatEther(value);
+    if (typeof value === 'object' && value.toString) return value.toString();
+    return value;
+}
+
 function Cards({ account, SendTo, Arbiter, Amount, escrowCreated, handleApprove, handleRefund, Condition, error, escrowAddress, status }) {
+
     return (
         <>
             {
@@ -12,12 +20,17 @@ function Cards({ account, SendTo, Arbiter, Amount, escrowCreated, handleApprove,
                         <p className='text-[#e94f37] text-bold'>Beneficiary Address = {SendTo}</p>
                         <p className='text-[#e94f37] text-bold'>Arbiter Address = {Arbiter}</p>
                         <p className='text-[#e94f37] text-bold'>Condition = {Condition}</p>
-                        <p className='text-[#e94f37] text-bold'>
+                        {/* <p className='text-[#e94f37] text-bold'>
                             Amount = {ethers.BigNumber.isBigNumber(Amount)
                                 ? ethers.utils.formatEther(Amount)
                                 : Amount?.toString?.()}{" "}
                             SepoliaETH
+                        </p> */}
+
+                        <p className='text-[#e94f37] font-bold'>
+                            Amount: {formatValue(Amount)} SepoliaETH
                         </p>
+
 
                         <div className='m-auto flex gap-4 justify-around items-center'>
                             <button onClick={handleApprove} className='bg-[#393e41] text-[#e94f37] m-auto p-3 rounded cursor-pointer'>Approve</button>
